@@ -1,9 +1,13 @@
 package com.example.dz2_8.service;
 
-import com.example.dz2_7.exeptions.EmployeeAlreadyAddedException;
-import com.example.dz2_7.exeptions.EmployeeNotFoundExeption;
-import com.example.dz2_7.exeptions.EmployeeStorageIsFullException;
-import com.example.dz2_7.model.Employee;
+import com.example.dz2_8.exeptions.EmployeeAlreadyAddedException;
+import com.example.dz2_8.exeptions.EmployeeNotFoundExeption;
+import com.example.dz2_8.exeptions.EmployeeStorageIsFullException;
+import com.example.dz2_8.model.Employee;
+import com.example.dz2_8.exeptions.EmployeeAlreadyAddedException;
+import com.example.dz2_8.exeptions.EmployeeNotFoundExeption;
+import com.example.dz2_8.exeptions.EmployeeStorageIsFullException;
+import com.example.dz2_8.model.Employee;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,8 +25,8 @@ public class EmployeeService {
         return employee.getFirstName() + employee.getLastName();
     }
 
-    public Employee add(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+    public Employee add(String firstName, String lastName, int department, double salary) {
+        Employee employee = new Employee(firstName, lastName,department,salary);
         if (employees.containsKey(getKey(employee))) {
             throw new EmployeeAlreadyAddedException();
         }
@@ -34,18 +38,18 @@ public class EmployeeService {
     }
 
 
-    public Employee remove(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+    public Employee remove(String firstName, String lastName, int department, double salary) {
+        Employee employee = new Employee(firstName, lastName,department,salary);
         String key = getKey(employee);
         if (!employees.containsKey(key)) {
             throw new EmployeeNotFoundExeption();
         }
-        return employees.remove(key);
+        return employees.get(key);
 
     }
 
-    public Employee find(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+    public Employee find(String firstName, String lastName, int department, double salary) {
+        Employee employee = new Employee(firstName, lastName,department,salary);
         if (!employees.containsKey(getKey(employee))) {
             throw new EmployeeNotFoundExeption();
         }
